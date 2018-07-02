@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!-- 教師結算記録-->
+<section>
+    <div class="leftpanel"></div>
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-graduation-cap"></i> <span data-locale="teacher.title">教师管理</span> <span
+                    data-locale="teacher.wages.title">工资结算</span></h2>
+        </div>
+
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline" id="queryForm" action="/teacher/wages" method="post">
+                        <input name="page" id="page" type="hidden" value="${page}">
+                        <input name="size" id="size" type="hidden" value="${size}">
+                        <input name="teacherId" type="hidden" value="${teacherId!}" id="search_teacherId">
+                        <div class="form-group">
+                            <label class="" data-locale="common.teacher.search.teacherName">所属老师</label>
+                            <input type="text" class="form-control input-sm select-teacher" name="teacherName"
+                                   value="${vm.teacherName!}"
+                                   data-toggle="modal"
+                                   data-target=".select-teacher-modal">
+                        </div>
+                        <div class="form-group">
+                            <label class="" data-locale="teacher.wages.search.date">时间：</label>
+                            <input type="text" class="form-control input-sm" placeholder="yyyy-mm"
+                                   id="datepicker-star" name="date" value="${vm.date!}">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="teacher.wages.filed.id">#</th>
+                                <th data-locale="teacher.wages.filed.teacherName">名称</th>
+                                <th data-locale="teacher.wages.filed.date">月份</th>
+                                <th data-locale="teacher.wages.filed.pay">工资</th>
+                                <th data-locale="teacher.wages.filed.status">状态</th>
+                                <th data-locale="teacher.wages.filed.action">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if total == 0>
+                                <tr class="success">
+                                    <td colspan="6">暂无数据</td>
+                                </tr>
+                            </#if>
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.id}</td>
+                                    <td>${data.teacherName}</td>
+                                    <td>${data.year?c}年${data.month}月</td>
+                                    <td>${data.pay}</td>
+                                    <td>
+                                        <#if  data.status == 0>待结算</#if>
+                                        <#if  data.status == 1>已结算</#if>
+                                    </td>
+                                    <td node-id="${data.id}">
+                                        <#if  data.status == 0>
+                                            <span class="table-btn wages-pay"
+                                                  data-locale="teacher.wages.filed.action.pay">结算</span>
+                                        </#if>
+                                        <span class="table-btn show-class"
+                                              data-locale="teacher.wages.filed.action.classRe">查看排班</span>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--教师列表-->
+<div class="modal fade select-teacher-modal" id="select-teacher-modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"></div>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script>
+    loadPaginator({size:${size}, page:${page}, totalPage:${totalPage}}, ".pagination");
+    jQuery('#datepicker-star').datepicker({
+        dateFormat: "yy-mm", showOtherMonths: true, selectOtherMonths: true
+    });
+    // 申请结算
+    $(".wages-pay").on("click", function () {
+        layer.confirm("确定要申请结算吗？", function (index) {
+            layer.close(index);
+            var id = $(this).parent().attr("node-id");
+            $.getJSON("/teacher/pay?id=" + id, function (json) {
+                _common.message(json,"申请成功","");
+                if (json.code == 0) {
+                    $("#wagesForm").submit();
+                }
+            });
+        });
+    });
+    // 查看排班
+    $(".show-class").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        window.location.href = "/teacher/classRecord?teacherId=" + id;
+    });
+</script>
+</body>
+
+</html>

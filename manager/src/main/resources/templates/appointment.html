@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link href="../static/js/layer/theme/default/layer.css" rel="stylesheet">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--学员预约-->
+<section>
+    <div class="leftpanel"></div>
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-pencil"></i><span data-locale="appointment.title"></span> <span
+                    data-locale="${title}"></span></h2>
+        </div>
+
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="appointment.filed.createTime">预约时间</th>
+                                <th data-locale="appointment.filed.time">上课时间</th>
+                                <th data-locale="appointment.filed.studentName">学生名称</th>
+                                <th data-locale="appointment.filed.studentMobile">手机号</th>
+                                <th data-locale="appointment.filed.status">状态</th>
+                                <th data-locale="appointment.filed.action">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if total == 0>
+                                <tr class="success">
+                                    <td colspan="6">暂无数据</td>
+                                </tr>
+                            </#if>
+                            <#list item as data>
+                                <tr class="success">
+                                    <td>${data.createTime?date!}</td>
+                                    <td>${data.courseDate?date}（第${data.courseIndex!}节）</td>
+                                    <td>${data.studentName!}</td>
+                                    <td>${data.studentMobile!}</td>
+                                    <td>
+                                        <#if  data.courseStatus == -9>已关闭</#if>
+                                        <#if  data.courseStatus == -1>未付款</#if>
+                                        <#if  data.courseStatus == 0>预约</#if>
+                                        <#if  data.courseStatus == 1>已用</#if>
+                                        <#if  data.courseStatus == 2>失约</#if>
+                                    </td>
+                                    <td node-id="${data.id}">
+                                        <#if  data.courseStatus == 0>
+                                            <a href="#" class="btn btn-info used-appointment"
+                                               data-locale="appointment.filed.action.used">已用</a>
+                                            <a href="#" class="btn btn-info anone-appointment"
+                                               data-locale="appointment.filed.action.anone">失约</a>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script>
+    var url = '${url}';
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination", url);
+
+    $(function () {
+        //更改预约状态为已用
+        $(".table").on("click", ".used-appointment", function () {
+            var id = $(this).parent().attr("node-id");
+            editAppointmentStatus(id, 1);
+        });
+        //  更改预约状态为失约
+        $(".table").on("click", ".anone-appointment", function () {
+            var id = $(this).parent().attr("node-id");
+            editAppointmentStatus(id, 2);
+        });
+    });
+
+    function editAppointmentStatus(id, status) {
+        layer.confirm("确认要更改学生预约状态吗？", function (index) {
+            layer.close(index);
+            $.post("/appointment/edit", {"id": id, "status": status}, function (json) {
+                _common.message(json, "学生预约状态更改成功",url);
+            }, "json");
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <link href="../static/js/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--教師列表-->
+<section>
+    <div class="leftpanel"></div>
+    <!-- leftpanel -->
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-graduation-cap"></i> <span data-locale="student.title">教师管理</span> <span
+                    data-locale="student.list.title">学生列表</span></h2>
+        </div>
+        <!--contentpanel-->
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-heading btn-box-wrap">
+                    <form id="teacherForm" class="form-inline" method="post" action="/student/list">
+                        <input name="page" id="page" value="1" type="hidden">
+                        <input name="size" value="20" type="hidden">
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="teacher.list.filed.id">#</th>
+                                <th data-locale="teacher.list.filed.userMobile">手机号</th>
+                                <th data-locale="teacher.list.filed.userNickName">用户昵称</th>
+                                <th data-locale="teacher.list.filed.createTime">注册时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.id!}</td>
+                                    <td>${data.userMobile!}</td>
+                                    <td>${data.userNickName!}</td>
+                                    <td>${data.createTime?string('yyyy-MM-dd')!}</td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+                <!-- panel-body -->
+            </div>
+        </div>
+    </div>
+    <!-- mainpanel -->
+</section>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script src="../static/js/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+<script src="../static/js/bootstrap-fileinput/js/locales/zh.js" type="text/javascript"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script>
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination", "/student/list");
+</script>
+</body>
+</html>

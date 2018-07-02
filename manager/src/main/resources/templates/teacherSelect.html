@@ -1,0 +1,48 @@
+<!-- 教师选择窗口-->
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="text" class="form-control input-sm" name="teacherName" id="exampleInputEmail2"
+                       placeholder="名称">
+            </div>
+            <button type="button" class="btn btn-primary btn-sm teacher-select-search"
+                    data-locale="teacher.list.search.searchBtn">查询
+            </button>
+            <div class="table-responsive">
+                <table class="table mb30">
+                    <thead>
+                    <tr>
+                        <th data-locale="teacher.list.filed.id">#</th>
+                        <th data-locale="teacher.list.filed.img">头像</th>
+                        <th data-locale="teacher.list.filed.teacherName">名称</th>
+                        <th data-locale="teacher.list.filed.teacherMobile">手机号</th>
+                        <th data-locale="teacher.list.filed.status">状态</th>
+                        <th data-locale="teacher.list.filed.action">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <#list item as data>
+                        <tr>
+                            <td>${data.id}</td>
+                            <td><img class="table-img" src="${data.userImg!}"/></td>
+                            <td>${data.userNickname!}</td>
+                            <td>${data.userMobile!}</td>
+                            <td>
+                                <#if  data.status == 0>未导入课程</#if>
+                                <#if  data.status == 1>已导入课程</#if>
+                            </td>
+                            <td>
+                                        <span class="table-btn select-teacher-ok"
+                                              data-locale="teacher.list.filed.action.selected"
+                                              onclick="_common.selected('${data.id}','${data.userNickname}')" data-dismiss="modal">确定</span>
+                            </td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

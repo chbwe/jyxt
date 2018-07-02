@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--节假日管理-->
+<section>
+    <div class="leftpanel"></div>
+    <!-- leftpanel -->
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-pencil"></i> <span data-locale="holiday.title"></span> <span
+                    data-locale="holiday.list.title"></span></h2>
+        </div>
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-heading btn-box-wrap">
+                    <form class="form-inline">
+                        <#if isadd>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target=".bs-example-modal-lg" data-locale="holiday.list.action.add">
+                            </button>
+                        </#if>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="holiday.list.filed.day">日期</th>
+                                <th data-locale="holiday.list.filed.content">备注</th>
+                                <th data-locale="holiday.list.filed.action">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if total == 0>
+                                <tr class="success">
+                                    <td colspan="3">暂无数据</td>
+                                </tr>
+                            </#if>
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.holidayDay?date}</td>
+                                    <td>${data.holidayName!}</td>
+                                    <td node-id="${data.id}">
+                                        <#if isadd>
+                                            <span class="table-btn"
+                                                  data-locale="holiday.list.filed.action.delete">删除</span>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 新增节假日 -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title" data-locale="holiday.list.addmodal.title">新增</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" data-locale="holiday.list.addmodal.day"></label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" placeholder="yyyy-mm-dd"
+                               id="datepicker">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" data-locale="holiday.list.addmodal.content"></label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="holidayName" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-6">
+                        <button class="btn btn-primary btn-sm holiday-save" data-dismiss="modal"
+                                data-locale="holiday.list.addmodal.action.save">保存
+                        </button>
+                        <button class="btn btn-default btn-sm" data-dismiss="modal"
+                                data-locale="holiday.list.addmodal.action.cancel">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script>
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination", "/holiday/list");
+
+    //设置时间格式、并限制日期
+    jQuery('#datepicker').datepicker({dateFormat: "yy-mm-dd", minDate: "+1"});
+
+    //删除节假日
+    $(".table-btn").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        layer.confirm("确认要删除此节假日吗？", function (index) {
+            layer.close(index);
+            $.getJSON("/holiday/delete?id=" + id, function (json) {
+                _common.message(json, "节假日删除成功", "/holiday/list");
+            });
+        });
+    });
+
+    //保存节假日
+    $(".holiday-save").on("click", function () {
+        var obj = {
+            holidayName: $("#holidayName").val(),
+            holidayDay: $("#datepicker").val()
+        };
+        $.ajax({
+            url: "/holiday/add",
+            method: "POST",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            contentType: 'application/json',
+            success: function (json) {
+                _common.message(json, "节假日新增成功", "/holiday/list");
+            }
+        })
+    })
+</script>
+</body>
+</html>

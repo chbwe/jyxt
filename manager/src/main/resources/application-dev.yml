@@ -1,0 +1,22 @@
+server:
+   port: 8080
+spring:
+   application:
+      name: jypt_manager
+   datasource:
+      url: jdbc:mysql://127.0.0.1:3306/jyxt?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+   freemarker:
+      template-loader-path: classpath:/templates
+      cache: false
+      charset: UTF-8
+      suffix: .html
+#设定静态文件路径，js,css等
+   mvc:
+      static-path-pattern: /static/**
+   jpa:
+      show-sql: false
+   jmx:
+      enabled: false

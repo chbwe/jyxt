@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+<body>
+<!-- header-right -->
+<a class="menutoggle"><i class="fa fa-bars"></i></a>
+<div class="header-right">
+    <ul class="headermenu">
+        <li>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    ${user.userNickname!}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                    <li><a  onclick="_common.i18n.switch()">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <span data-locale="language">English</span>
+                    </a>
+                    </li>
+                    <li>
+                        <a  data-toggle="modal" data-target=".edit-password-modal-lg">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                            <span data-locale="header.action.password.edit">修改密码</span></a>
+                    </li>
+                    <li>
+                        <a href="/logout"><i class="glyphicon glyphicon-log-out"></i>
+                            <span data-locale="logout">退出</span></a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- header-right -->
+
+<!-- 修改密码窗口-->
+<div class="modal fade edit-password-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title" data-locale="header.action.password.edit">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" data-locale="header.action.password.old">原密码:</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control input-sm"
+                               id="edit_password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" data-locale="header.action.password.new">新密码:</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control input-sm"
+                               id="edit_newPassword" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" data-locale="header.action.password.confirm">确认密码:</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control input-sm"
+                               id="edit_confirmPassword" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-6">
+                        <button class="btn btn-primary btn-sm password-save" data-locale="header.action.password.save">
+                            保存
+                        </button>
+                        <button class="btn btn-default btn-sm password-cancel" data-dismiss="modal"
+                                data-locale="header.action.password.cancel">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

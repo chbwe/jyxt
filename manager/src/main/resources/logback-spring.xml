@@ -1,0 +1,27 @@
+<configuration>
+    <property name="consoleLayoutPattern"
+              value="%-20(%d{yyyyMMdd_HH:mm:ss.SSS} [%logger][%thread] [%-4relative])
+                [%X{hostName} %X{requestId} %X{processId} %X{service.timing} ][%level] %msg%n"/>
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout name="StandardFormat" class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${consoleLayoutPattern}</pattern>
+        </layout>
+    </appender>
+
+    <!-- 文件输出 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/manager.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/manager.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{MM/dd/yyyy HH:mm:ss} %-5level ${version} [%thread]%logger{16} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

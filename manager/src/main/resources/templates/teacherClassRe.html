@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!-- 教师管理--上课记录-->
+<section>
+    <div class="leftpanel"></div>
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <div class="pageheader">
+            <h2><i class="fa fa-graduation-cap"></i> <span data-locale="teacher.title">教师管理</span> <span
+                    data-locale="teacher.classRe.title">上课记录</span></h2>
+        </div>
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <!--查询项-->
+                <div class="panel-heading btn-box-wrap">
+                    <form class="form-inline" id="queryForm" action="/teacher/classRecord">
+                        <input name="teacherId" type="hidden" value="${teacherId!}" id="search_teacherId">
+                        <div class="form-group">
+                            <label class="" data-locale="common.teacher.search.teacherName">所属老师</label>
+                            <input type="text" class="form-control input-sm select-teacher" name="teacherName"
+                                   value="${teacherName!}"
+                                   data-toggle="modal"
+                                   data-target=".select-teacher-modal">
+                        </div>
+                        <div class="form-group">
+                            <label class="" data-locale="teacher.classRe.search.startDate">时间：</label>
+                            <input type="text" class="form-control input-sm" placeholder="yyyy-mm-dd"
+                                   id="datepicker-star" name="startDate" value="${startDate!}">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm"
+                                data-locale="teacher.classRe.search.searchBtn">查询
+                        </button>
+                    </form>
+                </div>
+
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="teacher.classRe.filed.time">日期</th>
+                                <th data-locale="teacher.classRe.filed.week">星期</th>
+                                <th data-locale="teacher.classRe.filed.index1">第一节课</th>
+                                <th data-locale="teacher.classRe.filed.index2">第二节课</th>
+                                <th data-locale="teacher.classRe.filed.index3">第三节课</th>
+                                <th data-locale="teacher.classRe.filed.index4">第四节课</th>
+                                <th data-locale="teacher.classRe.filed.index5">第五节课</th>
+                                <th data-locale="teacher.classRe.filed.index6">第六节课</th>
+                                <th data-locale="teacher.classRe.filed.index7">第七节课</th>
+                                <th data-locale="teacher.classRe.filed.index8">第八节课</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if item??>
+                                <#list item as data>
+                                    <tr>
+                                        <td>${data.weekDay!}</td>
+                                        <td>${data.week!}</td>
+                                        <td>${data.key1!}</td>
+                                        <td>${data.key2!}</td>
+                                        <td>${data.key3!}</td>
+                                        <td>${data.key4!}</td>
+                                        <td>${data.key5!}</td>
+                                        <td>${data.key6!}</td>
+                                        <td>${data.key7!}</td>
+                                        <td>${data.key8!}</td>
+                                    </tr>
+                                </#list>
+
+                                <#else>
+                                    <tr>
+                                        <td colspan="10">请选择老师进行查看</td>
+                                    </tr>
+                            </#if>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- panel-body -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--教师列表-->
+<div class="modal fade select-teacher-modal" id="select-teacher-modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"></div>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script type="text/javascript">
+    jQuery('#datepicker-star').datepicker({dateFormat: "yy-mm-dd"});
+</script>
+</body>
+
+</html>

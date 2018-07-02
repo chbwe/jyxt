@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>预约购买--外教之家</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Community Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link href="css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css'/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="js/layer/theme/default/layer.css" rel='stylesheet' type='text/css'/>
+    <!--webfont-->
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap-datetimepicker.min.css" rel='stylesheet' type='text/css'/>
+    <!----drop down----->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                    function () {
+                        $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                        $(this).toggleClass('open');
+                    },
+                    function () {
+                        $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                        $(this).toggleClass('open');
+                    }
+            );
+        });
+    </script>
+    <!----font-Awesome----->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!----font-Awesome----->
+    <!--light-box-files -->
+    <script src="js/jquery.chocolat.js"></script>
+    <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen" charset="utf-8"/>
+    <!--light-box-files -->
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('#example1 a').Chocolat();
+        });
+    </script>
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('.gallery a').Chocolat();
+        });
+    </script>
+    <style>
+        .datetimepicker {
+            width: 217px;
+        }
+
+        .table label {
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<nav class="navbar nav_bottom" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header nav_2">
+            <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                    data-target="#bs-megadropdown-tabs">Menu
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+            <ul class="nav navbar-nav nav_1">
+                <li>
+                    <a href="index.html">首页</a>
+                </li>
+                <li>
+                    <a href="about.html">简介</a>
+                </li>
+                <li>
+                    <a href="article.html">教师</a>
+                </li>
+                <li class="current_page">
+                    <a href="classified_database.html">预约</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+<script type="text/javascript">
+    $(function () {
+        blinkeffect('#txtblnk');
+    })
+
+    function blinkeffect(selector) {
+        $(selector).fadeOut('slow', function () {
+            $(this).fadeIn('slow', function () {
+                blinkeffect(this);
+            });
+        });
+    }
+</script>
+<script type="application/javascript" src="js/common.js"></script>
+<div class="about_banner">
+    <div class="container">
+        <h2>艺百汇新教育</h2>
+        <span class="breadcrumbs"><i class="fa fa-home home_1"></i><span>杭州滨江</span></span>
+    </div>
+</div>
+
+<!--预约试听列表-->
+<div class="about_top"></div>
+<!--预约试听列表-->
+
+<div class="footer_bottom">
+
+    <div class="container">
+        <div class="copy">
+            <p>Copyright &copy; 2018 艺百汇新教育</p>
+        </div>
+    </div>
+
+    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;">Top </span></a>
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+             var defaults = {
+             containerID: 'toTop', // fading element id
+             containerHoverID: 'toTopHover', // fading element hover id
+             scrollSpeed: 1200,
+             easingType: 'linear'
+             };
+             */
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+</div>
+<!----language selector----->
+<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
+<link href="css/jquery.uls.css" rel="stylesheet"/>
+<link href="css/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="css/jquery.uls.lcd.css" rel="stylesheet"/>
+<!-- Source -->
+<script src="js/jquery.uls.data.js"></script>
+<script src="js/jquery.uls.data.utils.js"></script>
+<script src="js/jquery.uls.lcd.js"></script>
+<script src="js/jquery.uls.languagefilter.js"></script>
+<script src="js/jquery.uls.regionfilter.js"></script>
+<script src="js/jquery.uls.core.js"></script>
+<script src="js/layer/layer.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.uls-trigger').uls({
+            onSelect: function (language) {
+                var languageName = $.uls.data.getAutonym(language);
+                $('.uls-trigger').text(languageName);
+            },
+            quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+        });
+        load(1);
+    });
+
+    //加载预约列表
+    function load(page) {
+        $(".about_top").load("/teacher/classified?page=" + page);
+    }
+</script>
+
+<!-- 购买-->
+<div class="modal fade" id="applayaaa" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog_2" style="width: 750px; height: 700px; background-color: #fff;">
+        <div id="step_content_body">
+            <div class="steps clearfix">
+                <ul class="tablelistsetp" role="tablelist" style="margin-top: 10px;" id="tablelistsetp">
+                    <li role="tab" class="current">
+                        <a style="color: #fff;" step="1">请选择套餐</a>
+                    </li>
+                    <li role="tab" class="done">
+                        <a style="color: #fff;" step="2">选择开时始间</a>
+                    </li>
+                    <li role="tab" class="done">
+                        <a style="color: #fff;" step="3">选择上课时间</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content clearfix" id="step_content">
+                <input type="hidden" name="packagesId" id="packagesId">
+                <input type="hidden" name="teacherId" id="teacherId">
+                <input type="hidden" name="reservationType" id="reservationType">
+                <!-- 选择套餐 -->
+                <section step="1" class="body" aria-hidden="true" id="step_content_1"></section>
+                <!-- 选择开时始 -->
+                <section step="2" class="body" aria-hidden="true" style="display: none;">
+                    <div>
+                        <label>时间</label>
+                        <div class="form-inline" style="display: inline-block;">
+                            <input type="text" name="startDate" class="form-control input-sm" id="datetimepicker"
+                                   required/>
+                        </div>
+                    </div>
+                </section>
+                <!-- 选择上课时间 -->
+                <section step="3" class="body" aria-hidden="true" style="display: none;" id="step_content_3"></section>
+
+                <section step="4" class="body" aria-hidden="true" style="display: none;" id="step_content_4"></section>
+
+            </div>
+
+            <!-- 上一步 、下一步-->
+            <div class="actions clearfix">
+                <ul role="menu" aria-label="Pagination">
+                    <li class="" style=" margin: 0 0.5em; float: left;">
+                        <button id="prev" type="button" class="btn btn-primary btn-sm">上一步</button>
+                    </li>
+                    <li aria-hidden="false" aria-disabled="false"
+                        style="display: block; margin: 0 0.5em;float: left;">
+                        <button id="next" type="button" class="btn btn-primary btn-sm">下一步</button>
+                    </li>
+                    <li aria-hidden="false" aria-disabled="false"
+                        style="display: block;margin: 0 0.5em;float: left;">
+                        <button id="classified_submit" type="button" class="btn btn-primary btn-sm">提交</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+    loadStep1();
+    var step = 1, minStep = 2;
+    $('#datetimepicker').datetimepicker({
+        autoclose: true,
+        clearBtn: true, //清除按钮
+        todayBtn: false, //今日按钮
+        format: "yyyy-mm-dd",
+        language: 'zh-CN',//中文，需要引用zh-CN.js包
+        minView: 2//日期时间选择器所能够提供的最精确的时间选择视图
+    });
+
+    //前一步
+    $("#prev").click(function () {
+        step = step - 1;
+        showStep(step);
+    });
+    //点击下一步
+    $("#next").click(function () {
+        _next();
+    });
+
+    //下一步
+    function _next() {
+        if (valid(step)) {
+            step = step + 1;
+            loadStep3(step);
+            showStep(step);
+        }
+    }
+
+    //验证
+    function valid(cstep) {
+        //第二步，需要选择时间
+        if (cstep == 2) {
+            var data = $("#datetimepicker").val();
+            if (data == "") return false;
+        }
+        //第三步，需要选择
+        if (cstep == 3) {
+            var l = $("input[name='courseId']:checked").length;
+            if (l <= 0) return false;
+        }
+        return true;
+    }
+
+    function loadStep1() {
+        $("#step_content_1").load("/classified/step1")
+    }
+    //加载老师排班数据
+    function loadStep3(cstep) {
+        if (cstep != 3) return;
+        $("#step_content_3").load("/classified/step3?packageId=" + $("#packagesId").val() + "&teacherId=" + $("#teacherId").val() + "&reservationType=" + $("#reservationType").val() + "&courseDate=" + $('#datetimepicker').val())
+    }
+
+    //显示当前步骤的页面
+    function showStep(cstep) {
+        if (cstep == 4)return;
+        if (cstep < minStep) return;
+        var el = $("li[role='tab'] a[step='" + cstep + "']");
+        $("li[role='tab']").removeClass("current").addClass("done");
+        el.parent().removeClass("done").addClass("current");
+        $("#step_content>section").hide();
+        $("#step_content>section[step='" + cstep + "']").show();
+        if (cstep == minStep) {
+            $("#prev").hide();
+        } else {
+            $("#prev").show();
+        }
+        if (cstep == 3 || cstep == 1) {
+            $("#next").hide();
+        } else {
+            $("#next").show();
+        }
+        if (cstep == 3) {
+            $("#classified_submit").show();
+        } else {
+            $("#classified_submit").hide();
+        }
+    }
+
+    //提交预约、购买申请
+    $("#classified_submit").on("click", function () {
+        var ids = $("input[name='courseId']:checked");
+        var _ = [];
+        $(ids).each(function (index, item) {
+            _.push($(item).val());
+        });
+        var obj = {
+            "teacherId": $("#teacherId").val(),
+            "reservationType": $("#reservationType").val(),
+            "courseDate": $("#datetimepicker").val(),
+            "packageId": $("#packagesId").val(),
+            "courseId": _
+        };
+        $.ajax({
+            url: "/classified/apply",
+            method: "POST",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            contentType: 'application/json',
+            success: function (json) {
+                if (json.code == 0) {
+                    var data = json.data;
+                    window.location.href = ("/pay/alipay/app/" + data);
+                } else {
+                    layer.alert(json.message);
+                }
+            }
+        })
+    });
+</script>
+<style>
+    td {
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+    }
+
+    tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+    }
+
+    tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+    }
+
+    thead {
+        display: table-header-group;
+        vertical-align: middle;
+        border-color: inherit;
+    }
+
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    table {
+        background-color: transparent;
+    }
+
+    .actions {
+        position: relative;
+        display: block;
+        text-align: right;
+        width: 100%;
+    }
+
+    .body {
+
+        padding: 2.5%;
+    }
+
+    .content {
+        display: block;
+        margin: 0.5em;
+        min-height: 30em;
+        overflow: hidden;
+        position: relative;
+        width: auto;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .tablelistsetp {
+        list-style: none !important;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tablelistsetp li {
+        float: left;
+        width: 20%;
+        display: block;
+        margin: 0 0.5em 0.5em;
+        padding: 1em 1em;
+        text-decoration: none;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .number {
+        font-size: 1.429em;
+    }
+
+    .current {
+        background: #2184be;
+        color: #fff;
+        cursor: default;
+    }
+
+    .done {
+        background: #9dc8e2;
+        color: #fff;
+        line-height: 25px;
+    }
+
+    .done a {
+        background: #9dc8e2;
+        color: #fff;
+
+    #currentA {
+        background: #2184be;
+        color: #fff;
+        cursor: default;
+    }
+</style>
+</body>
+</html>

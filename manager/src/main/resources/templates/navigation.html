@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+<body>
+<div class="logopanel">
+    <h1 data-locale="navigation.title">后台管理系统</h1>
+</div>
+<div class="leftpanelinner">
+    <ul class="nav nav-pills nav-stacked nav-bracket">
+        <!--用户预约-->
+        <li class="nav-parent">
+            <a href=""><i class="fa fa-edit"></i><span data-locale="appointment.title">用户预约</span></a>
+            <ul class="children">
+                <li>
+                    <a href="/appointment/my"><i class="fa fa-caret-right"></i>
+                        <span data-locale="appointment.my">我的预约</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/appointment/list"><i class="fa fa-caret-right"></i>
+                        <span data-locale="appointment.all">总预约用户</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/appointment/anone"><i class="fa fa-caret-right"></i>
+                        <span data-locale="appointment.anone">失约用户</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--教师管理-->
+        <li class="nav-parent">
+            <a href=""><i class="fa fa-graduation-cap"></i> <span data-locale="teacher.title">教师管理</span></a>
+            <ul class="children" style="display: block;">
+                <li>
+                    <a href="/teacher/list"><i class="fa fa-caret-right"></i>
+                        <span data-locale="teacher.list.title">教师列表</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/teacher/wages"><i class="fa fa-caret-right"></i>
+                        <span data-locale="teacher.wages.title">工资结算</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/teacher/course"><i class="fa fa-caret-right"></i>
+                        <span data-locale="teacher.myclass.title">我的课程</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/teacher/classRecord"><i class="fa fa-caret-right"></i>
+                        <span data-locale="teacher.classRe.title">上课记录</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/teacher/leaveRecord"><i class="fa fa-caret-right"></i>
+                        <span data-locale="teacher.leaveRe.title">请假记录</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/teacher/stopRecord"><i class="fa fa-caret-right"></i>
+                        <span data-locale="teacher.stopRe.title">停课记录</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--学员管理-->
+        <li class="nav-parent">
+            <a href=""><i class="fa fa-users"></i> <span data-locale="student.title">学员</span></a>
+            <ul class="children">
+                <!--<li class="">-->
+                <!--<a href="/student/list"><i class="fa fa-caret-right"></i>-->
+                <!--<span data-locale="student.list.title">学生列表</span>-->
+                <!--</a>-->
+                <!--</li>-->
+                <li class="">
+                    <a href="/student/lmember"><i class="fa fa-caret-right"></i>
+                        <span data-locale="student.lmember.title">购买查询</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/student/leaveRe"><i class="fa fa-caret-right"></i>
+                        <span data-locale="student.leaveRe.title">请假查询</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="/student/stopRecord"><i class="fa fa-caret-right"></i>
+                        <span data-locale="student.stopRe.title">停课查询</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--课程套餐管理-->
+        <li class="nav-parent">
+            <a href=""><i class="fa fa-codepen"></i> <span data-locale="course.title">课程套餐</span></a>
+            <ul class="children">
+                <li class="">
+                    <a href="/class/list"><i class="fa fa-caret-right"></i>
+                        <span data-locale="course.list.title">套餐列表</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--节假日管理-->
+        <li class="nav-parent ">
+            <a href=""><i class="fa fa-plane"></i> <span data-locale="holiday.title">节假日管理</span></a>
+            <ul class="children">
+                <li class="">
+                    <a href="/holiday/list"><i class="fa fa-caret-right"></i>
+                        <span data-locale="holiday.list.title">节假日列表</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

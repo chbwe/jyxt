@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--购买记录-->
+<section>
+    <div class="leftpanel"></div>
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <div class="pageheader">
+            <h2><i class="fa fa-users"></i> <span data-locale="student.title"></span> <span
+                    data-locale="student.lmember.title">购买记录</span></h2>
+        </div>
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="student.lmember.filed.id">#</th>
+                                <th data-locale="student.lmember.filed.studentName">学生名称</th>
+                                <th data-locale="student.lmember.filed.studentMobile">联系方式</th>
+                                <th data-locale="student.lmember.filed.type">套餐类型</th>
+                                <th data-locale="student.lmember.filed.pay">套餐金额</th>
+                                <th data-locale="student.lmember.filed.courses">上课节数</th>
+                                <th data-locale="student.lmember.filed.times">上课时间</th>
+                                <th data-locale="student.lmember.filed.createTime">购买时间</th>
+                                <th data-locale="student.lmember.filed.status">状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if total == 0>
+                                <tr class="success">
+                                    <td colspan="9">暂无数据</td>
+                                </tr>
+                            </#if>
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.id!}</td>
+                                    <td>${data.studentName!}</td>
+                                    <td>${data.studentMobile!}</td>
+                                    <td>1/${data.packageType!}</td>
+                                    <td>${data.packagePrice!}</td>
+                                    <td>${data.packageIndex!}</td>
+                                    <td>
+                                        <#if  data.packageTimes == 60>1小时</#if>
+                                        <#if  data.packageTimes == 90>1.5小时</#if>
+                                        <#if  data.packageTimes == 120>2小时</#if>
+                                    </td>
+                                    <td>${data.createTime?date!}</td>
+                                    <td>
+                                        <#if  data.status == -9>已关闭</#if>
+                                        <#if  data.status == 0>已付款</#if>
+                                        <#if  data.status == -1>待付款</#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="dataTables_paginate">
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script>
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination", "/student/lmember");
+</script>
+</body>
+</html>

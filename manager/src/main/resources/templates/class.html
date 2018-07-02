@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link href="../static/js/layer/theme/default/layer.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--课程套餐列表-->
+<section>
+    <div class="leftpanel"></div>
+    <!-- leftpanel -->
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-codepen"></i> <span data-locale="course.title">课程套餐</span> <span
+                    data-locale="course.list.title">套餐列表</span></h2>
+        </div>
+
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-heading btn-box-wrap">
+                    <form class="form-inline">
+                        <#if isadd>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target=".bs-example-modal-lg" data-locale="course.list.action.add">新增出售
+                            </button>
+                        </#if>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="course.list.filed.id">#</th>
+                                <th data-locale="course.list.filed.type">类型</th>
+                                <th data-locale="course.list.filed.times">时长</th>
+                                <th data-locale="course.list.filed.indexs">节数</th>
+                                <th data-locale="course.list.filed.pay">价格</th>
+                                <th data-locale="course.list.filed.action">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if total == 0>
+                                <tr class="success">
+                                    <td colspan="6">暂无数据</td>
+                                </tr>
+                            </#if>
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.id}</td>
+                                    <td>1/${data.type}</td>
+                                    <td>
+                                        <#if  data.times == 60>1</#if>
+                                        <#if  data.times == 90>1.5</#if>
+                                        <#if  data.times == 120>2</#if>
+                                    </td>
+                                    <td>${data.indexs!}</td>
+                                    <td>${data.price!}</td>
+                                    <td node-id="${data.id}">
+                                        <#if isadd>
+                                        <span class="table-btn class-edit" data-toggle="modal"
+                                              data-target=".bs-example-modal-lg"
+                                              data-locale="course.list.filed.action.edit">修改</span>
+                                        <span class="table-btn class-delete"
+                                              data-locale="course.list.filed.action.delete">删除</span>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="dataTables_paginate">
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  修改编辑套餐 -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title" data-locale="course.list.addmodal.title">套餐编辑</h4>
+            </div>
+            <div class="modal-body">
+                <form id="classSaveForm">
+                    <input name="id" type="hidden" value="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="course.list.addmodal.type">类型:</label>
+                        <div class="col-sm-6">
+                            <select class="form-control  mb15" id="class_type" name="type">
+                                <option value="1">1/1</option>
+                                <option value="2">1/2</option>
+                                <option value="3">1/3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="course.list.addmodal.times">时长:</label>
+                        <div class="col-sm-6">
+                            <select class="form-control  mb15" id="class_times" name="times">
+                                <option value="60">1</option>
+                                <option value="90">1.5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="course.list.addmodal.indexs">节数:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="indexs" class="form-control input-sm" id="class_course" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="course.list.addmodal.pay">金额:</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control input-sm" id="class_pay" name="price" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-6">
+                            <button class="btn btn-primary btn-sm class-save" data-dismiss="modal"
+                                    data-locale="course.list.addmodal.action.save">保存
+                            </button>
+                            <button class="btn btn-default btn-sm" data-dismiss="modal"
+                                    data-locale="course.list.addmodal.action.cancel">取消
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script>
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination", "/class/list");
+
+    //删除套餐记录
+    $(".class-delete").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        layer.confirm("确认要删除此套餐吗？", function (index) {
+            layer.close(index);
+            $.getJSON("/class/delete?id=" + id, function (json) {
+                _common.message(json, "课程套餐删除成功", "/class/list");
+            });
+        });
+    });
+
+    //修改
+    $(".class-edit").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        $.getJSON("/class/load?id=" + id, function (json) {
+            var data = json.data;
+            _common.from.load("classSaveForm", data);
+        });
+    });
+
+    //打开新增窗口时，清除表单数据
+    $('.bs-example-modal-lg').on('hide.bs.modal', function (e) {
+        _common.from.clear("#classSaveForm");
+    });
+
+    //新增套餐或者更新套餐
+    $(".class-save").on("click", function () {
+        var form = $("#classSaveForm").serializeArray();
+        var obj = {};
+        $(form).each(function (index, item) {
+            if (obj[item.name]) obj[item.name] = obj[item.name] + "," + item.value;
+            else obj[item.name] = item.value;
+        });
+        $.ajax({
+            url: "/class/save",
+            method: "POST",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            contentType: 'application/json',
+            success: function (json) {
+                _common.message(json, "课程套餐更新成功", "/class/list");
+            }
+        });
+    })
+</script>
+</body>
+</html>

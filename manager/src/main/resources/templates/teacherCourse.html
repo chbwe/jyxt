@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台系统管理</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--教师管理--我的课程 -->
+<section>
+    <div class="leftpanel"></div>
+    <!-- leftpanel -->
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-graduation-cap"></i> <span data-locale="teacher.title">教师管理</span> <span
+                    data-locale="teacher.myclass.title">我的课程</span></h2>
+        </div>
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline" id="queryForm" action="/teacher/course" method="post">
+                        <input name="teacherId" type="hidden" value="${teacherId!}" id="search_teacherId">
+                        <div class="form-group">
+                            <label class="" data-locale="common.teacher.search.teacherName">所属老师</label>
+                            <input type="text" class="form-control input-sm select-teacher" name="teacherName"
+                                   value="${teacherName!}"
+                                   data-toggle="modal"
+                                   data-target=".select-teacher-modal">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="teacher.myclass.filed.week">星期</th>
+                                <th data-locale="teacher.myclass.filed.index1">第一节课</th>
+                                <th data-locale="teacher.myclass.filed.index2">第二节课</th>
+                                <th data-locale="teacher.myclass.filed.index3">第三节课</th>
+                                <th data-locale="teacher.myclass.filed.index4">第四节课</th>
+                                <th data-locale="teacher.myclass.filed.index5">第五节课</th>
+                                <th data-locale="teacher.myclass.filed.index6">第六节课</th>
+                                <th data-locale="teacher.myclass.filed.index7">第七节课</th>
+                                <th data-locale="teacher.myclass.filed.index8">第八节课</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if item??>
+                                <#list item as data>
+                                    <tr>
+                                        <td>${data.weekDay}</td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key1}">${data.time1!}</a>
+                                        </td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key2}">${data.time2!}</a>
+                                        </td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key3}">${data.time3!}</a>
+                                        </td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key4}">${data.time4!}</a>
+                                        </td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key5}">${data.time5!}</a>
+                                        </td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key6}">${data.time6!}</a>
+                                        </td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key7}">${data.time7!}</a>
+                                        </td>
+                                        <td><a class="${class}" data-type="text"
+                                               data-pk="${data.key8}">${data.time8!}</a>
+                                        </td>
+                                    </tr>
+                                </#list>
+                                <#else>
+                                    <tr>
+                                        <td colspan="9">请选择老师进行查看</td>
+                                    </tr>
+                            </#if>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--教师列表-->
+<div class="modal fade select-teacher-modal" id="select-teacher-modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"></div>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/bootstrap-editable.min.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script>
+    jQuery('.basicInline').editable({
+        type: 'json',
+        url: '/teacher/course/edit',
+        ajaxOptions: {
+            type: 'post'
+        }
+        , success: function (json) {
+            _common.message(json, "修改成功", "");
+            if(json.code==0){
+                var pk = jQuery(this).attr('data-pk');
+                var _pk = pk.split('_');
+                if(_pk.length ==3){
+                    var __pk = _pk[0]+"_"+_pk[1]+"_"+json.data;
+                    jQuery(this).attr('data-pk',__pk);
+                }
+                window.location.reload();
+            }
+            if (json.code != 0) {
+                return "";
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

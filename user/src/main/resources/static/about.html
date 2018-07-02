@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>公司简介--外教之家</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Community Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href="css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css'/>
+    <link href="js/layer/theme/default/layer.css" rel='stylesheet' type='text/css'/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <!--webfont-->
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+    <!----drop down----->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!----font-Awesome----->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!----font-Awesome----->
+    <!--light-box-files -->
+    <script src="js/jquery.chocolat.js"></script>
+    <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen" charset="utf-8"/>
+    <!--light-box-files -->
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('.gallery a').Chocolat();
+        });
+    </script>
+</head>
+<body>
+<div class="header"></div>
+<nav class="navbar nav_bottom" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header nav_2">
+            <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                    data-target="#bs-megadropdown-tabs">Menu
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+            <ul class="nav navbar-nav nav_1">
+                <li><a href="index.html">首页</a></li>
+                <li class="current_page"><a href="about.html">简介</a></li>
+                <li><a href="article.html">教师</a></li>
+                <li><a href="classified_database.html">预约</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+<script type="text/javascript">
+    $(function () {
+        blinkeffect('#txtblnk');
+    })
+    function blinkeffect(selector) {
+        $(selector).fadeOut('slow', function () {
+            $(this).fadeIn('slow', function () {
+                blinkeffect(this);
+            });
+        });
+    }
+</script>
+
+<div class="about_banner">
+    <div class="container">
+        <h2>艺百汇新教育</h2>
+        <span class="breadcrumbs"><a><i class="fa fa-home home_1"></i></a> <span>杭州滨江</span></span>
+    </div>
+</div>
+<div class="about_top">
+    <div class="container">
+        <div class="col-md-3 column-1">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">公司概要</a>
+                <!--<a href="#" class="list-group-item ">工作内容</a>
+                <a href="#" class="list-group-item ">学员成果</a>-->
+
+            </div>
+        </div>
+        <div class="col-md-9 column-2">
+            <p class="m_1">
+                艺百汇由资深的媒体界人士应中迪创办，艺百汇新教育为艺百汇的教育服务平台。<br/>
+
+                艺百汇新教育专注的并非传统意义上的知识与技能的教育，而是以自然养成教育为基础理念，以自然为媒介，以自然而然的方式，让个体完成自然人的转化。<br/>
+
+                艺百汇新教育提倡人们不仅要在“自然中学习”，更要“艺术地学习”。艺百汇新教育创造性将对生活、文学、绘画、音乐、舞蹈以及生命哲学的教育融入生活情境中，开启成人与孩子对生命与世界的感知力，并帮助大家构建和谐的亲子、家庭、社会与自然的关系。</p>
+            <p class="m_1 m_2">
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="footer_bottom">
+    <div class="container">
+        <div class="copy">
+            <p>Copyright &copy; 2018 艺百汇新教育</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+             var defaults = {
+             containerID: 'toTop', // fading element id
+             containerHoverID: 'toTopHover', // fading element hover id
+             scrollSpeed: 1200,
+             easingType: 'linear'
+             };
+             */
+
+
+        });
+    </script>
+</div>
+<!----language selector----->
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
+<link href="css/jquery.uls.css" rel="stylesheet"/>
+<link href="css/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="css/jquery.uls.lcd.css" rel="stylesheet"/>
+<!-- Source -->
+<script src="js/jquery.uls.data.js"></script>
+<script src="js/jquery.uls.data.utils.js"></script>
+<script src="js/jquery.uls.lcd.js"></script>
+<script src="js/jquery.uls.languagefilter.js"></script>
+<script src="js/jquery.uls.regionfilter.js"></script>
+<script src="js/jquery.uls.core.js"></script>
+<script src="js/layer/layer.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.uls-trigger').uls({
+            onSelect: function (language) {
+                var languageName = $.uls.data.getAutonym(language);
+                $('.uls-trigger').text(languageName);
+            },
+            quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+        });
+    });
+</script>
+</body>
+</html>

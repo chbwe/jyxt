@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <link href="../static/js/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--教師列表-->
+<section>
+    <div class="leftpanel"></div>
+    <!-- leftpanel -->
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-graduation-cap"></i> <span data-locale="teacher.title">教师管理</span> <span
+                    data-locale="teacher.list.title">教师列表</span></h2>
+        </div>
+
+        <!--contentpanel-->
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-heading btn-box-wrap">
+                    <form id="teacherForm" class="form-inline" method="post" action="/teacher/list">
+                        <input name="page" id="page" value="1" type="hidden">
+                        <input name="size" value="20" type="hidden">
+                        <div class="form-group">
+                            <label class="" for="exampleInputEmail2" data-locale="teacher.list.search.name">名称：</label>
+                            <input type="text" class="form-control input-sm" name="teacherName"
+                                   id="exampleInputEmail2"
+                                   placeholder="名称">
+                        </div>
+                        <div class="form-group">
+                            <label class="" data-locale="teacher.list.search.status">状态：</label>
+                            <select class="form-control" name="teacherStatus">
+                                <option value=""></option>
+                                <option value="0"
+                                <#if vm?? && vm.teacherStatus?? && vm.teacherStatus == 0> selected</#if>
+                                >未导入课程</option>
+                                <option value="1"
+                                <#if vm?? && vm.teacherStatus?? && vm.teacherStatus == 1> selected</#if>
+                                >已导入课程</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm"
+                                data-locale="teacher.list.search.searchBtn">查询
+                        </button>
+                        <#if isadd>
+                            <button type="button" class="btn btn-primary btn-sm mr5" data-toggle="modal"
+                                    data-target=".bs-example-modal-lg" data-locale="teacher.list.action.add">新增
+                            </button>
+                        </#if>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="teacher.list.filed.id">#</th>
+                                <th data-locale="teacher.list.filed.img">头像</th>
+                                <th data-locale="teacher.list.filed.teacherName">名称</th>
+                                <th data-locale="teacher.list.filed.teacherMobile">手机号</th>
+                                <th data-locale="teacher.list.filed.status">状态</th>
+                                <th data-locale="teacher.list.filed.action">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.id}</td>
+                                    <td><img class="table-img" src="${data.userImg!}"/></td>
+                                    <td>${data.userNickname!}</td>
+                                    <td>${data.userMobile!}</td>
+                                    <td>
+                                        <#if  data.status == 0>未导入课程</#if>
+                                        <#if  data.status == 1>已导入课程</#if>
+                                    </td>
+                                    <td node-id="${data.id}">
+                                        <span class="table-btn show-edit" data-toggle="modal"
+                                              data-target=".bs-example-modal-lg"
+                                              data-locale="teacher.list.filed.action.edit">修改</span>
+                                        <span class="table-btn reset-password"
+                                              data-locale="teacher.list.filed.action.resetpassword">重置密码</span>
+                                        <span class="table-btn stop-course"
+                                              data-locale="teacher.list.filed.action.stop"
+                                              data-target=".bs-example-modal-lg2"
+                                              data-toggle="modal">停课</span>
+                                        <span class="table-btn show-leave" data-toggle="modal"
+                                              data-target=".bs-example-modal-lg1"
+                                              data-locale="teacher.list.filed.action.leave">请假</span>
+                                        <span class="table-btn show-class"
+                                              data-locale="teacher.list.filed.action.classRe">查看排班</span>
+                                        <span class="table-btn show-course"
+                                              data-locale="teacher.list.filed.action.course">查看课程</span>
+                                        <span class="table-btn show-leavelist"
+                                              data-locale="teacher.list.filed.action.leaveRe">请假记录</span>
+                                        <span class="table-btn show-wages"
+                                              data-locale="teacher.list.filed.action.wages">查看结算记录</span>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+                <!-- panel-body -->
+            </div>
+        </div>
+    </div>
+    <!-- mainpanel -->
+</section>
+
+<!--新增教师-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title" data-locale="teacher.list.addmodal.title">编辑教师信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" data-locale="teacher.list.addmodal.img">头像:</label>
+                    <div class="col-sm-10">
+                        <img style="width: 50px;height: 50px;" id="img0" src=""/>
+                        <input id="upload_file_0" name="file" type="file" class="file">
+                    </div>
+                </div>
+                <form id="add-teacher-from">
+                    <input type="hidden" value="" id="userImg" name="userImg"/>
+                    <input type="hidden" value="" id="id" name="id"/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               data-locale="teacher.list.addmodal.teacherName">名称:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="userNickname" class="form-control" placeholder="请输入教师姓名"
+                                   required="" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="teacher.list.addmodal.school">大学:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="userSchool" class="form-control" placeholder="请输入教师所在大学"
+                                   required=""
+                                   maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="teacher.list.addmodal.mobile">联系方式:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="userMobile" class="form-control" placeholder="请输入教师联系方式"
+                                   required=""
+                                   maxlength="20" id="userMobile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="teacher.list.addmodal.content">简介:</label>
+                        <div class="col-sm-6">
+                            <textarea rows="5" class="form-control" placeholder="" required=""
+                                      name="userContent"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="teacher.list.addmodal.pay1">上课费用(正式):</label>
+                        <div class="col-sm-6">
+                            <input type="number" name="userPrice" class="form-control" placeholder="请输入上课费用(正式)" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" data-locale="teacher.list.addmodal.pay2">上课费用(试用):</label>
+                        <div class="col-sm-6">
+                            <input type="number" name="userPrice2" class="form-control" placeholder="请输入上课费用(试用)" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-6">
+                            <button class="btn btn-primary btn-sm teacher-save" data-dismiss="modal"
+                                    data-locale="teacher.list.addmodal.action.save">保存
+                            </button>
+                            <button class="btn btn-default btn-sm" data-dismiss="modal"
+                                    data-locale="teacher.list.addmodal.action.cancel">取消
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 请假-->
+<div class="modal fade bs-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title" data-locale="teacher.list.leavemodal.title">新增请假</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" data-locale="teacher.list.leavemodal.day">日期:</label>
+                    <div class="col-sm-6">
+                        <input type="hidden" id="leaveType" value="">
+                        <input type="hidden" id="leaveTeacherId" value="">
+                        <input type="text" class="form-control input-sm" placeholder="yyyy-mm-dd"
+                               id="leaveDate" name="leaveDate">
+                    </div>
+                </div>
+
+                <div class="form-group leave-index">
+                    <label class="col-sm-2 control-label" data-locale="teacher.list.leavemodal.index">时间:</label>
+                    <div class="col-sm-6">
+                        <select class="form-control  mb15" name="courseIndex" id="courseIndex">
+                            <option value="1">第一节课</option>
+                            <option value="2">第二节课</option>
+                            <option value="3">第三节课</option>
+                            <option value="4">第四节课</option>
+                            <option value="5">第五节课</option>
+                            <option value="6">第六节课</option>
+                            <option value="7">第七节课</option>
+                            <option value="8">第八节课</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-6">
+                        <button class="btn btn-primary btn-sm leave-save" data-dismiss="modal"
+                                data-locale="teacher.list.leavemodal.action.save">保存
+                        </button>
+                        <button class="btn btn-default btn-sm" data-dismiss="modal"
+                                data-locale="teacher.list.leavemodal.action.cancel">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--停课-->
+<div class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title" data-locale="teacher.list.leavemodal.title">新增停课</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" data-locale="teacher.list.leavemodal.startDay">停课开始日期:</label>
+                    <div class="col-sm-6">
+                        <input type="hidden" id="stopTeacherId" value="">
+                        <input type="text" class="form-control input-sm" placeholder="yyyy-mm-dd"
+                               id="stopStartDate" name="startDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" data-locale="teacher.list.leavemodal.endDay">停课结束日期:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control input-sm" placeholder="yyyy-mm-dd"
+                               id="stopEndDate" name="endDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-6">
+                        <button class="btn btn-primary btn-sm stop-save" data-dismiss="modal"
+                                data-locale="teacher.list.leavemodal.action.save">保存
+                        </button>
+                        <button class="btn btn-default btn-sm" data-dismiss="modal"
+                                data-locale="teacher.list.leavemodal.action.cancel">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script src="../static/js/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="../static/js/bootstrap-fileinput/js/locales/zh.js"></script>
+<script>
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination", function (page) {
+        $("#page").val(page);
+        $("#teacherForm").submit();
+    });
+
+    jQuery('#leaveDate').datepicker({dateFormat: "yy-mm-dd"});
+    jQuery('#stopStartDate').datepicker({dateFormat: "yy-mm-dd"});
+    jQuery('#stopEndDate').datepicker({dateFormat: "yy-mm-dd"});
+
+    //清除表单数据
+    $('.bs-example-modal-lg').on('hide.bs.modal', function (e) {
+        _common.from.clear("#add-teacher-from");
+        $("#userMobile").removeAttr("readOnly");
+    });
+
+    //打开停课窗口
+    $(".stop-course").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        $("#stopTeacherId").val(id);
+    });
+
+    //打开请假窗口
+    $('.show-leave').on('click', function (e) {
+        var id = $(this).parent().attr("node-id");
+        $("#leaveTeacherId").val(id);
+    });
+
+    //重置密码
+    $(".reset-password").click(function () {
+        var id = $(this).parent().attr("node-id");
+        layer.confirm("确定要重置此老师的登录密码吗？", function (index) {
+            layer.close(index);
+            $.getJSON("/teacher/password/reset?id=" + id, function (json) {
+                _common.message(json, "密码重置成功", "");
+            })
+        });
+    });
+
+    //保存停课记录
+    $(".stop-save").click(function () {
+        var obj = {
+            "startDate": $("#stopStartDate").val(),
+            "endDate": $("#stopEndDate").val(),
+            "teacherId": $("#stopTeacherId").val()
+        };
+        var url = "/teacher/stop";
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            contentType: 'application/json',
+            success: function (json) {
+                _common.message(json, "停课成功", "/teacher/list");
+            }
+        })
+    });
+
+    //保存请假记录
+    $(".leave-save").click(function () {
+        var obj = {
+            "leaveDate": $("#leaveDate").val(),
+            "courseIndex": $("#courseIndex").val(),
+            "teacherId": $("#leaveTeacherId").val()
+        };
+        var url = "/teacher/leave";
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            contentType: 'application/json',
+            success: function (json) {
+                _common.message(json, "请假成功", "/teacher/list");
+            }
+        })
+    });
+
+    //新增教师
+    $(".teacher-save").click(function () {
+        var form = $("#add-teacher-from").serializeArray();
+        var obj = {};
+        $(form).each(function (index, item) {
+            if (obj[item.name]) obj[item.name] = obj[item.name] + "," + item.value;
+            else obj[item.name] = item.value;
+        });
+        $.ajax({
+            url: "/teacher/add",
+            method: "POST",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            contentType: 'application/json',
+            success: function (json) {
+                _common.message(json, "更新成功", "/teacher/list");
+            }
+        })
+    });
+
+    //编辑
+    $(".show-edit").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        $.getJSON("/teacher/load?teacherId=" + id, function (json) {
+            if (json.code == 0) {
+                var data = json.data;
+                $("#userMobile").attr("readOnly", "readOnly");
+                _common.from.load("add-teacher-from", data);
+                $("#img0").attr("src", data.userImg);
+            }
+        })
+    });
+
+    //查看工资结算记录
+    $(".show-wages").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        window.location.href = "/teacher/wages?teacherId=" + id;
+    });
+
+    //查看请假记录
+    $(".show-leavelist").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        window.location.href = "/teacher/leaveRecord?teacherId=" + id;
+    });
+
+    //查看课程
+    $(".show-course").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        window.location.href = "/teacher/course?teacherId=" + id;
+    });
+
+    // 查看排班
+    $(".show-class").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        window.location.href = "/teacher/classRecord?teacherId=" + id;
+    });
+
+    //初始化文件上传
+    $("#upload_file_0").fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: "/upload/images", //上传的地址
+        allowedFileExtensions: ['jpg', 'gif', 'png', 'jpeg'],
+        dropZoneEnabled: false,
+        showCancel: false,
+        showRemove: false,
+        showUpload: false,
+        maxFileSize: 300
+    });
+
+    //触发上传操作
+    $("#upload_file_0").on("change", function () {
+        $("#upload_file_0").fileinput("upload");
+    }).on("fileuploaded", function (event, data, previewId, index) {
+        var json = data.response;
+        if (json.code == 0) {
+            layer.alert("图片上传成功");
+            $("#img0").attr("src", json.data);
+            $("#userImg").val(json.data);
+        } else {
+            layer.alert("上传失败,失败原因" + json.message);
+        }
+        $('#upload_file_0').fileinput('clear').fileinput('cancel').fileinput('enable');
+    });
+</script>
+</body>
+</html>

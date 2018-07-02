@@ -1,0 +1,26 @@
+server:
+   port: 80
+spring:
+   application:
+      name: jypt_user
+   datasource:
+      url: jdbc:mysql://127.0.0.1:3306/jyxt?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+   freemarker:
+      template-loader-path: classpath:/templates
+      cache: false
+      charset: UTF-8
+      suffix: .ftl
+   jpa:
+      show-sql: false
+   jmx:
+      enabled: false
+sdk:
+   alipay:
+      dev: false #默认false,为true表示使用沙箱环境
+      sign-type: RSA2 #签名算法
+      app-id: 2018051460130489
+      private-key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCKyyjXzADoMO0O9wjMZgTRjkzZVrYExucZpXbCMe0YaptNJMIeH3x2fkEgF2FvpkQeqtbqlt/2QaJSb6SOHDsLqzyfwKMef5WTQOwBJPhhU/XbO+RqcuGQmzsr3sRLq+DTqHoSybQHJt5af7l2V7+6m7RJCW4nZM3epbAaVdQC05kBEFN+ys4OXTU8cMDXajZXWiAaf7Q4xuB2NZqXzEE3/hpDCgGMTJEvki7gncLdPMnwbp+au0QiPnByOOMS16iQUt6W8pq2c1MB3VMQQJyxWXZ/wa8nGaoYzPG09bO/aehF5vGImXUfKXjYmVI/nGmMuYsxV5Jnnm5No8nuLKrhAgMBAAECggEABs1mNw1cjgS32Z/p4nqtice7pHtHeHx3Hx6o72ObBzNSYTmH+gn5A6W0c2ox8FLpy8b7uYujdmJJHlkya3SewDeoRPwgAoKmRg1Mg9HYCo0e45vP2he/TmMNR10nqb3Gyxjawsj39dHF3BGeeVpbnz26XEoGCBA8tsjQFLpYJbs+MO74KBPnVAjnKFmxxmBw/Lc3ygBJdwpMImiiLQfnFbVNlIEaw0np85Ww3CvbpXATC3vOdXzfmDl7LirPyibNoQy2HCgCBFoRF/rWjtKKaoO01itAHQQzMlMk0PqZ9gQq4i6Ktw36AMU60UUi9UtXTDCNe9MM7boStmTc2kqMQQKBgQDtMiatLQTEVpiHVYx2A4exchRd+LXASMO4WvBxkivZtqrFNeHcehzON5Ewif9Q2PWyYkj3pWKk1b0IUOP7JH7d50CAP78o6maqpwcsHW5wtV9OIm+QtIyeHJLAfHIykLjC0YhevRjr6kM0l/hDIr+RiXjyGePTZjl/4t/E60nOpQKBgQCVy/NyHIdH476vtwDQuEqABXSVFVl1G2OAW+0fpNz3y5N3+dCIMBmqTSc27+gaj54WULWZ0+zHsxMl2M3lTcgSZzYkP8JqHfm7o4eGI4Kw13bcqI08EzQVWSG2eKPJ0hGsHyKREtvy1K6COFgI3JmHZH/oIARsX4VqE3J3NfFSjQKBgFPsbqrPRuSBDy6zIiOPVC+AgZxOJ2CFXlqYMoK8iS9a5kkoq2Vq/04ncwONj/x3B1e6Vr7okWJpDZ0nocJ2Qz0YWUYHSAeeB/1RY8REFZNjWPk4TekROL+otHPOlEk302d645lBptOx611sd7apUMaZsWVXq7hcbvPEvg/agB7RAoGADMppcyj0dDMCKUbbDvdthRjyJ3i3NsSr7l3rFXSiWZZMdUYjhD13M4969bnue7YfrZAesY/i+/pSfDzS9+14U/n0KYw4MY91r4v7Gn0Vv7vmLllGFgcdv2To+Ae9FJKXZ7cQ4IpXtZhrfjsJaVhM077FHTD+r7JIVhJrB7rXbFECgYEAtjpTWvE+8KFXOKt8HelwaUgPxDxgPdJoUFIQwXsj9pnhl5+00tZfjJsQTTiUpO0+VBzlmXm4vUeoKeywqVVyUecu5sNIpJBlWtgX/ygz3ugRBEpT8e2EdkIFUbXst+riQhPJRu3jwLlrCI3MC/2xkb6rHOD9gSFUv5cFnBapPpU=
+      alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlQHW1/SNra7L6fJIApCiPA+Ia0DdwAbaodl/F2LINMPJDcXbup+3Nce5y4LizeXP45zJydUuri6XvTyUYo/CW8SB+sEiX8lr1e8wDuZ9aHmqDvpe2NUWU1wvsAvQiDgfaws4Vr1gcCHSlNuciZlfPdcJRDcZ36s7oAWg+Agx2T6kq7oVh1S4xQwXyg1KiT+VoCnC23hl534fSIWR8ZmtTlxOTyOHXV+dxzLk189ZtiK7kKxuxmKsvpNl1OVQ48nhSXp/JRCU1R9Zbf4QccxKrMfvMAew6UiZyNuVnLyNUklitWT1+Pw0xJOgtbK9aul9jSpEjUeEQwzL7gujvQ66AwIDAQAB

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--教师请假记录-->
+<section>
+    <div class="leftpanel"></div>
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <div class="pageheader">
+            <h2><i class="fa fa-graduation-cap"></i><span data-locale="teacher.title">教师管理</span> <span
+                    data-locale="teacher.stopRe.title">停课记录</span></h2>
+        </div>
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline" id="queryForm" action="/teacher/stopRecord" method="post">
+                        <input name="page" id="page" type="hidden" value="${page}">
+                        <input name="size" id="size" type="hidden" value="${size}">
+                        <input name="teacherId" type="hidden" value="${teacherId!}" id="search_teacherId">
+                        <div class="form-group">
+                            <label class="" data-locale="common.teacher.search.teacherName">所属老师</label>
+                            <input type="text" class="form-control input-sm select-teacher" name="teacherName"
+                                   value="${vm.teacherName!}"
+                                   data-toggle="modal"
+                                   data-target=".select-teacher-modal">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="student.stopRecord.filed.id">#</th>
+                                <th data-locale="student.stopRecord.filed.teacherName">名称</th>
+                                <th data-locale="student.stopRecord.filed.startDate">停课开始日期</th>
+                                <th data-locale="student.stopRecord.filed.endDate">停课截至日期</th>
+                                <th data-locale="student.stopRecord.filed.action">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if total == 0>
+                                <tr class="success">
+                                    <td colspan="5">暂无数据</td>
+                                </tr>
+                            </#if>
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.id}</td>
+                                    <td>${data.studentName!}</td>
+                                    <td>${data.startTime?date}</td>
+                                    <td>${data.endTime?date}</td>
+                                    <td node-id="${data.id}" node-type="/student/stopRecord">
+                                        <#if data.status==0>
+                                        <span class="table-btn delete-leave"
+                                              data-locale="common.filed.action.delete">删除</span>
+                                            <#if isApproval >
+                                            <span class="table-btn admin-approval"
+                                                  data-locale="common.filed.action.approval">同意</span>
+                                            </#if>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--教师列表-->
+<div class="modal fade select-teacher-modal" id="select-teacher-modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"></div>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script>
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination");
+
+    //删除请假记录
+    $(".delete-leave").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        layer.confirm("确认要删除此停课记录吗？", function (index) {
+            layer.close(index);
+            $.getJSON("/teacher/stopRecord/delete?id=" + id, function (json) {
+                _common.message(json, "停课记录删除成功", "/teacher/stopRecord");
+            });
+        });
+    });
+</script>
+</body>
+</html>

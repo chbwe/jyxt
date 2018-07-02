@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <title>后台管理系统</title>
+    <link href="../static/css/style.default.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.js"></script>
+    <script src="../static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../static/js/layer/theme/default/layer.css">
+</head>
+
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<!--请假记录-->
+<section>
+    <div class="leftpanel"></div>
+    <div class="mainpanel">
+        <div class="headerbar"></div>
+        <div class="pageheader">
+            <h2><i class="fa fa-users"></i> <span data-locale="student.title">学员管理</span> <span
+                    data-locale="student.leaveRe.title">请假记录</span></h2>
+        </div>
+        <div class="contentpanel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table mb30">
+                            <thead>
+                            <tr>
+                                <th data-locale="student.leaveRe.filed.id">#</th>
+                                <th data-locale="student.leaveRe.filed.studentName">名称</th>
+                                <th data-locale="student.leaveRe.filed.studentMobile">手机号</th>
+                                <th data-locale="student.leaveRe.filed.teacherName">老师</th>
+                                <th data-locale="student.leaveRe.filed.date">时间</th>
+                                <th data-locale="student.leaveRe.filed.index">课时</th>
+                                <th data-locale="student.leaveRe.filed.action">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <#if total == 0>
+                                <tr class="success">
+                                    <td colspan="7">暂无数据</td>
+                                </tr>
+                            </#if>
+                            <#list item as data>
+                                <tr>
+                                    <td>${data.id}</td>
+                                    <td>${data.studentName!}</td>
+                                    <td>${data.studentMobile!}</td>
+                                    <td>${data.teacherName!}</td>
+                                    <td>${data.date?date!}</td>
+                                    <td>${data.index!}</td>
+                                    <td node-id="${data.id}" node-type="/student/leaveRe">
+                                        <#if data.status==0>
+                                        <span class="table-btn leave-delete"
+                                              data-locale="student.leaveRe.filed.action.delete">删除</span>
+                                            <span class="table-btn admin-approval"
+                                                  data-locale="common.filed.action.approval">同意</span>
+                                        </#if>
+                                        <!--<#if isApproval >-->
+
+                                        <!--</#if>-->
+                                    </td>
+                                </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <ul class="pagination pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../static/js/jquery-ui-1.10.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jQuery.md5.js"></script>
+<script src="../static/js/modernizr.min.js"></script>
+<script src="../static/js/jquery.sparkline.min.js"></script>
+<script src="../static/js/toggles.min.js"></script>
+<script src="../static/js/layer/layer.js"></script>
+<script src="../static/js/retina.min.js"></script>
+<script src="../static/js/jquery.cookies.js"></script>
+<script src="../static/js/custom.js"></script>
+<script src="../static/js/bootstrap-paginator.min.js"></script>
+<script src="../static/js/jquery.i18n.properties.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script>
+    loadPaginator({
+        size:${size}, page:${page}, totalPage:${totalPage}
+    }, ".pagination", "/student/leaveRe");
+
+    //删除请假记录
+    $(".leave-delete").on("click", function () {
+        var id = $(this).parent().attr("node-id");
+        layer.confirm("确认要删除学生的请假记录吗？", function (index) {
+            layer.close(index);
+            $.getJSON("/student/leaveRe/delete?id=" + id, function (json) {
+                _common.message(json, "学生请假记录删除成功", "/student/leaveRe");
+            });
+        });
+    })
+</script>
+</body>
+</html>
