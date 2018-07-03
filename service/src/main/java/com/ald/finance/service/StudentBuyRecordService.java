@@ -145,7 +145,7 @@ public class StudentBuyRecordService {
                     predicateList.add(criteriaBuilder.equal(root.get("teacherId"), teacherId));
                 }
                 // 查询已支付过的
-                predicateList.add(criteriaBuilder.notEqual(root.get("status"), 1));
+//                predicateList.add(criteriaBuilder.equal(root.get("status"), 1));
                 Predicate[] predicates = new Predicate[predicateList.size()];
                 Order order = criteriaBuilder.desc(root.get("updateTime").as(Date.class));
                 return criteriaQuery.where(predicateList.toArray(predicates)).orderBy(order).getRestriction();

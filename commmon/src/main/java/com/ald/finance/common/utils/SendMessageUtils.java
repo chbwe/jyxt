@@ -34,10 +34,9 @@ public class SendMessageUtils {
     static final String accessKeySecret = "YWub3y1CTWjdNJJ2gtlxFvvWR5uNb2";
     
     public static MessageRecord sendSms(String userMobile, SMSEnum smsEnum, Map<String, String> map) {
-//        return null;
         return sendSms11(userMobile,smsEnum,map);
+//        return null;
     }
-
     
     public static MessageRecord sendSms11(String userMobile, SMSEnum smsEnum, Map<String, String> map) {
         if (StringUtils.isEmpty(smsEnum.getCode()))

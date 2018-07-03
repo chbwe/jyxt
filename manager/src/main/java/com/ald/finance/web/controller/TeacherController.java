@@ -10,6 +10,7 @@ import com.ald.finance.service.UserService;
 import com.ald.finance.web.vm.ChangePwdVm;
 import com.ald.finance.web.vm.TeacherSearchVm;
 import com.ald.finance.web.vm.TeacherVm;
+import com.ald.finance.web.vm.TeacherVm1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class TeacherController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseModel<Boolean> add(@RequestBody @Valid TeacherVm vm) {
+//        User user = getUser();
         User user = new User();
         user.setUserSchool(vm.getUserSchool());
         user.setUserImg(vm.getUserImg());
@@ -135,10 +137,33 @@ public class TeacherController extends BaseController {
     public ResponseModel<User> load(@RequestParam("teacherId") Long teacherId) {
         User user = getUser();
         if (user.getUserRole().equals(UserRoleEnum.Teacher.getRoleId())) {
-            return ResponseModels.ok(user);
+            TeacherVm1 user1 = changeUser1(user);
+            user1.setAdd(false);
+            return ResponseModels.ok(user1);
         }
-        user = userService.findOne(teacherId);
-        user.setUserPwd(null);
-        return ResponseModels.ok(user);
+        User user1 = userService.findOne(teacherId);
+        user1.setUserPwd(null);
+        TeacherVm1 user2 =  changeUser1(user1);
+        user2.setAdd(true);
+        return ResponseModels.ok(user2);
+    }
+
+
+    private TeacherVm1 changeUser1(User user){
+        TeacherVm1 teacherVm1 = new TeacherVm1();
+        teacherVm1.setId(user.getId());
+        teacherVm1.setUserNickname(user.getUserNickname());
+        teacherVm1.setUserMobile(user.getUserMobile());
+        teacherVm1.setUserPwd(user.getUserPwd());
+        teacherVm1.setUserRole(user.getUserRole());
+        teacherVm1.setCreateTime(user.getCreateTime());
+        teacherVm1.setUpdateTime(user.getUpdateTime());
+        teacherVm1.setUserImg(user.getUserImg());
+        teacherVm1.setUserContent(user.getUserContent());
+        teacherVm1.setUserPrice(user.getUserPrice());
+        teacherVm1.setUserPrice2(user.getUserPrice2());
+        teacherVm1.setUserSchool(user.getUserSchool());
+        teacherVm1.setStatus(user.getStatus());
+        return teacherVm1;
     }
 }

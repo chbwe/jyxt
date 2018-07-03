@@ -38,13 +38,15 @@ public class TeacherCourseService {
     
     public List<CourseDTO> findAllByTeacherId(Long teacherId, Long packageId) {
         List<TeacherCourse> list = teacherCourseRepository.findAllByUserId(teacherId);
-        Packages packages = packagesRepository.findOne(packageId);
-
-//        if (packageId != null) {
+        Integer pacakgeTimes = null;
+        if (packageId != null) {
+            Packages packages = packagesRepository.findOne(packageId);
+            pacakgeTimes = packages.getTimes();
 //            list = list.stream().filter(s -> s.getTimes().equals(packages.getTimes())).collect(Collectors.toList());
-//        }
-        return TeacherCourseUtils.listByTeacherId(list,packages.getTimes());
+        }
+        return TeacherCourseUtils.listByTeacherId(list,pacakgeTimes);
     }
+
     
     /**
      * 我的课程列表

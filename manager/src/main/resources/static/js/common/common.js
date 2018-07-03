@@ -84,6 +84,11 @@ var _common = {
             $(formId).find("input[type='text']").val("");
             $(formId).find("input[type='number']").val("");
             $(formId).find("textarea").val("");
+            $(formId).find("input[type='hidden']").val("");
+            if($(formId+" img") && $(formId+" img").length>0) {
+                $(formId + " img").attr('src', '');
+            }
+            console.log("exit")
         },
         //表单初始化
         load: function (formId, json) {
@@ -213,7 +218,7 @@ $(function () {
         var type = $(this).parent().attr("node-type");
         layer.confirm("确认要进行审批吗？", function (index) {
             layer.close(index);
-            $.getJSON(type + "/approval?id=" + id+"&status=1", function (json) {
+            $.getJSON(type + "/approval?id=" + id, function (json) {
                 _common.message(json, "操作成功", type);
             });
         });

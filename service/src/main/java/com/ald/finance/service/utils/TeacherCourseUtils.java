@@ -182,39 +182,79 @@ public class TeacherCourseUtils {
             }
             dto.setTime1(getIndexTime(map, 1));
             dto.setKey1(getIndexKey(map, 1, i));
-            dto.setShow1(getPackage(map,1).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow1(true);
+            }
+            else {
+                dto.setShow1(getPackage(map, 1).equals(packageTime));
+            }
 
             dto.setTime2(getIndexTime(map, 2));
             dto.setKey2(getIndexKey(map, 2, i));
-            dto.setShow2(getPackage(map,2).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow2(true);
+            }
+            else {
+                dto.setShow2(getPackage(map, 2).equals(packageTime));
+            }
 
             dto.setTime3(getIndexTime(map, 3));
             dto.setKey3(getIndexKey(map, 3, i));
-            dto.setShow3(getPackage(map,3).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow3(true);
+            }
+            else {
+                dto.setShow3(getPackage(map, 3).equals(packageTime));
+            }
 
 
             dto.setTime4(getIndexTime(map, 4));
             dto.setKey4(getIndexKey(map, 4, i));
-            dto.setShow4(getPackage(map,4).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow4(true);
+            }
+            else {
+                dto.setShow4(getPackage(map, 4).equals(packageTime));
+            }
 
             dto.setTime5(getIndexTime(map, 5));
             dto.setKey5(getIndexKey(map, 5, i));
-            dto.setShow5(getPackage(map,5).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow5(true);
+            }
+            else {
+                dto.setShow5(getPackage(map, 5).equals(packageTime));
+            }
 
 
             dto.setTime6(getIndexTime(map, 6));
             dto.setKey6(getIndexKey(map, 6, i));
-            dto.setShow6(getPackage(map,6).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow6(true);
+            }
+            else {
+                dto.setShow6(getPackage(map, 6).equals(packageTime));
+            }
 
 
             dto.setTime7(getIndexTime(map, 7));
             dto.setKey7(getIndexKey(map, 7, i));
-            dto.setShow7(getPackage(map,7).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow7(true);
+            }
+            else {
+                dto.setShow7(getPackage(map, 7).equals(packageTime));
+            }
 
 
             dto.setTime8(getIndexTime(map, 8));
             dto.setKey8(getIndexKey(map, 8, i));
-            dto.setShow8(getPackage(map,8).equals(packageTime));
+            if(packageTime == null){
+                dto.setShow8(true);
+            }
+            else {
+                dto.setShow8(getPackage(map, 8).equals(packageTime));
+            }
 
             temp.add(dto);
         }

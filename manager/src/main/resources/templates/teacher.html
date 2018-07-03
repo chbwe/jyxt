@@ -328,7 +328,7 @@
         size:${size}, page:${page}, totalPage:${totalPage}
     }, ".pagination", function (page) {
         $("#page").val(page);
-        $("#teacherForm").submit();
+        //$("#teacherForm").submit();
     });
 
     jQuery('#leaveDate').datepicker({dateFormat: "yy-mm-dd"});
@@ -433,6 +433,11 @@
                 $("#userMobile").attr("readOnly", "readOnly");
                 _common.from.load("add-teacher-from", data);
                 $("#img0").attr("src", data.userImg);
+                if(!data.add) {
+                    $("input[name='userPrice']").parent().parent().hide();
+                    $("input[name='userPrice2']").parent().parent().hide();
+                }
+
             }
         })
     });

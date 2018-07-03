@@ -41,11 +41,11 @@ public class CourseRecordJob {
      * 10分钟执行一次
      * 将课程状态更改为已上课（已请假的不做更改）
      */
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void changeStatus() {
         final LocalTime time = LocalTime.now();
         List<TeacherCourseRecord> list = teacherCourseRecordRepository.findAllByCourseRecordDate(LocalDate.now());
-        list = list.stream().filter(s -> s.getCourseRecordStatus() == 0 && s.getCourseRecordStartTime().isBefore(time))
+        list = list.stream().filter(s -> s.getCourseRecordStatus() != 0 && s.getCourseRecordStartTime().isAfter(time))
                 .map(record -> {
                     log.info("更改上课状态,{}", JSON.toJSONString(record));
                     record.setCourseRecordStatus(CourseRecordEnum.cls.getCode());
@@ -58,7 +58,7 @@ public class CourseRecordJob {
         List<Long> ids = list.stream().map(s -> s.getId()).collect(Collectors.toList());
         List<TeacherCourseRecordRel> recordRelList = teacherCourseRecordRelRepository.findAllByTeacherCourseRecordIdIn(ids);
 
-        recordRelList = recordRelList.stream().filter(s -> s.getStatus() == 0).map(s -> {
+        recordRelList = recordRelList.stream().filter(s -> s.getStatus() != 0).map(s -> {
             s.setStatus(1);
             return s;
         }).collect(Collectors.toList());
@@ -66,7 +66,7 @@ public class CourseRecordJob {
         if (CollectionUtils.isEmpty(recordRelList)) return;
         ids = recordRelList.stream().map(s -> s.getStudentCourseRecordId()).collect(Collectors.toList());
         List<StudentCourseRecord> studentCourseRecords = studentCourseRecordRepository.findAll(ids);
-        studentCourseRecords = studentCourseRecords.stream().filter(s -> s.getStatus() == 0).map(s -> {
+        studentCourseRecords = studentCourseRecords.stream().filter(s -> s.getStatus() != 0).map(s -> {
             s.setStatus(1);
             return s;
         }).collect(Collectors.toList());

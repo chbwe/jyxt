@@ -131,9 +131,8 @@ public class StudentLeaveRecordService {
         studentLeaveRecordRepository.save(record);
         
         // 审批不是同意，则直接返回
-        if (status != 1) {
+        if (status != 1)
             return true;
-        }
         sysStudentCourseService.studentLeave(record);
         return true;
     }

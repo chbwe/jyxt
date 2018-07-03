@@ -79,7 +79,7 @@ public class SysStudentCourseService {
      * @param record
      */
     public void studentLeave(StudentLeaveRecord record) {
-        StudentCourseRecord studentCourseRecord = studentCourseRecordRepository.findOne(record.getCourseRecordId());
+        StudentCourseRecord studentCourseRecord = studentCourseRecordRepository.findOne(record.getUserId());
         if (studentCourseRecord == null || !studentCourseRecord.getStatus().equals(CourseRecordEnum.none.getCode()))
             return;
         

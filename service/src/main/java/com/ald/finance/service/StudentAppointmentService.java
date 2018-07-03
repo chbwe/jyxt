@@ -43,7 +43,7 @@ public class StudentAppointmentService {
     
     @Autowired
     HolidayRepository holidayRepository;
-    
+
     public StudentAppointment save(StudentAppointment appointment, String key) {
         String courseId = key.split("_")[2];
         TeacherCourse teacherCourse = teacherCourseRepository.findOne(Long.valueOf(courseId));

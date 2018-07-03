@@ -66,12 +66,12 @@
                                         <#if data.status==0>
                                         <span class="table-btn leave-delete"
                                               data-locale="student.leaveRe.filed.action.delete">删除</span>
+
+                                        <#if isApproval >
                                             <span class="table-btn admin-approval"
                                                   data-locale="common.filed.action.approval">同意</span>
                                         </#if>
-                                        <!--<#if isApproval >-->
-
-                                        <!--</#if>-->
+                                        </#if>
                                     </td>
                                 </tr>
                             </#list>

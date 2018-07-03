@@ -136,6 +136,8 @@ public class UserService {
         user1.setUserSchool(user.getUserSchool());
         user1.setUpdateTime(LocalDateTime.now());
         user1.setUserNickname(user.getUserNickname());
+        user1.setUserPrice2(user.getUserPrice2());
+        user1.setUserPrice(user.getUserPrice());
         userRepository.save(user1);
         return true;
     }

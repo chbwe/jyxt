@@ -66,7 +66,7 @@ public class StudentLeaveRecordController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/leaveRe/approval")
-    public ResponseModel<Boolean> approval(@RequestParam("id") Long id, @RequestParam("status") Integer status) {
+    public ResponseModel<Boolean> approval(@RequestParam("id") Long id, @RequestParam(value = "status",defaultValue = "1") Integer status) {
         checkUserRole();
         studentLeaveRecordService.approval(id, status);
         return ResponseModels.ok(true);
