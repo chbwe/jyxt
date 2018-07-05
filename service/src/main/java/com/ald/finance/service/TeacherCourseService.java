@@ -12,11 +12,9 @@ import com.ald.finance.service.dto.CourseDTO;
 import com.ald.finance.service.utils.TeacherCourseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by liang3.zhang on 2018/6/1.
